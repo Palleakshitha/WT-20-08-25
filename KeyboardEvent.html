@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Keyboard Events</title>
+  <script>
+    function keyDown(event) {
+      document.getElementById("output").innerText = "Key Down: " + event.key;
+    }
+    function keyUp(event) {
+      document.getElementById("output").innerText = "Key Released: " + event.key;
+    }
+  </script>
+</head>
+<body>
+  <h1>Keyboard Events</h1>
+  <input type="text" placeholder="Type something..."
+         onkeydown="keyDown(event)" 
+         onkeyup="keyUp(event)">
+  <p id="output"></p>
+</body>
+</html>

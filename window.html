@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Advanced Window Events</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      min-height: 120px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      overflow-y: auto;
+      max-height: 250px;
+    }
+    .log-line {
+      margin: 4px 0;
+      padding: 4px 6px;
+      border-bottom: 1px dashed #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Window Events Demo</h1>
+  <div id="output"><strong>Event logs:</strong></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    function log(msg) {
+      const line = document.createElement("div");
+      line.className = "log-line";
+      line.textContent = msg;
+      output.appendChild(line);
+      output.scrollTop = output.scrollHeight; // auto scroll
+    }
+
+    // Window Load
+    window.addEventListener("load", () => {
+      log("Window loaded successfully!");
+      alert("Window loaded successfully!");
+    });
+
+    // Window Resize
+    window.addEventListener("resize", () => {
+      log(`Window resized to: ${window.innerWidth} x ${window.innerHeight}`);
+    });
+
+    // Window Scroll
+    window.addEventListener("scroll", () => {
+      log(" Window scrolled!");
+    });
+
+    // Window Before Unload
+    window.addEventListener("beforeunload", (event) => {
+      log("Window is about to be closed or refreshed.");
+      event.preventDefault();
+      event.returnValue = ""; // required for some browsers
+    });
+
+    // Window Focus / Blur
+    window.addEventListener("focus", () => log(" Window gained focus."));
+    window.addEventListener("blur", () => log(" Window lost focus."));
+  </script>
+</body>
+</html>

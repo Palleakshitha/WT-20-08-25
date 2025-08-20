@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mouse Events Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .box {
+      width: 220px;
+      height: 120px;
+      background-color: yellowgreen;
+      text-align: center;
+      line-height: 120px;
+      margin: 20px 0;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+    .hovered {
+      background-color: lightgreen;
+    }
+    .clicked {
+      background-color: tomato;
+      transform: scale(0.95);
+    }
+    .double-clicked {
+      background-color: gold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mouse Events</h1>
+  <div class="box">Hover / Click Me!</div>
+
+  <script>
+    const box = document.querySelector(".box");
+
+    // Click
+    box.addEventListener("click", () => {
+      alert("Box was clicked!");
+      box.classList.add("clicked");
+      setTimeout(() => box.classList.remove("clicked"), 300);
+    });
+
+    // Double click
+    box.addEventListener("dblclick", () => {
+      box.textContent = "Double Clicked!";
+      box.classList.add("double-clicked");
+      setTimeout(() => {
+        box.textContent = "Hover / Click Me!";
+        box.classList.remove("double-clicked");
+      }, 800);
+    });
+
+    // Mouse over
+    box.addEventListener("mouseover", () => {
+      box.classList.add("hovered");
+    });
+
+    // Mouse out
+    box.addEventListener("mouseout", () => {
+      box.classList.remove("hovered");
+    });
+
+    // Mouse down
+    box.addEventListener("mousedown", () => {
+      box.textContent = "Mouse Down!";
+    });
+
+    // Mouse up
+    box.addEventListener("mouseup", () => {
+      box.textContent = "Hover / Click Me!";
+    });
+  </script>
+</body>
+</html>

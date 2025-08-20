@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Advanced HTML Events (Vertical Logs)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      padding: 30px;
+    }
+    h1 {
+      color: #222;
+    }
+    button {
+      padding: 10px 20px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 5px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    input, select {
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 260px;
+      font-size: 14px;
+    }
+    .focus-style {
+      background-color: lightyellow;
+      border-color: orange;
+    }
+    img {
+      width: 200px;
+      margin: 15px 0;
+      border-radius: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    img.hovered {
+      transform: scale(1.1);
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
+    }
+    #output {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      min-height: 120px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+    .log-line {
+      margin: 4px 0;
+      padding: 4px 6px;
+      border-bottom: 1px dashed #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Advanced HTML Events (Vertical Logs)</h1>
+
+  <!-- Buttons -->
+  <button id="clickBtn">Click Me</button>
+  <button id="dblClickBtn">Double Click Me</button>
+
+  <!-- Input focus/blur -->
+  <input type="text" id="nameBox" placeholder="Focus & Blur Example">
+
+  <!-- Dropdown -->
+  <select id="selectBox">
+    <option value="">--Select a language--</option>
+    <option value="JavaScript">JavaScript</option>
+    <option value="Python">Python</option>
+    <option value="Java">Java</option>
+  </select>
+
+  <!-- Image -->
+  <img id="hoverImg" src="https://via.placeholder.com/200x120.png?text=Hover+Me" alt="Hover me">
+
+  <!-- Form -->
+  <form id="myForm">
+    <input type="text" placeholder="Enter your email">
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="output"><strong>Event logs:</strong></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    function log(msg) {
+      const line = document.createElement("div");
+      line.className = "log-line";
+      line.textContent = msg;
+      output.appendChild(line);
+      // auto scroll to bottom
+      output.scrollTop = output.scrollHeight;
+    }
+
+    // Click Event
+    document.getElementById("clickBtn").addEventListener("click", () => {
+      log("Button was clicked!");
+    });
+
+    // Double Click Event
+    document.getElementById("dblClickBtn").addEventListener("dblclick", () => {
+      log("Button was double-clicked!");
+    });
+
+    // Focus + Blur
+    const nameBox = document.getElementById("nameBox");
+    nameBox.addEventListener("focus", () => {
+      nameBox.classList.add("focus-style");
+      log("Input gained focus.");
+    });
+    nameBox.addEventListener("blur", () => {
+      nameBox.classList.remove("focus-style");
+      log("Input lost focus.");
+    });
+
+    // Change (Dropdown)
+    document.getElementById("selectBox").addEventListener("change", (e) => {
+      log("You selected: " + e.target.value);
+    });
+
+    // Mouse Over & Out (Image)
+    const img = document.getElementById("hoverImg");
+    img.addEventListener("mouseover", () => {
+      img.classList.add("hovered");
+      log("Mouse entered the image!");
+    });
+    img.addEventListener("mouseout", () => {
+      img.classList.remove("hovered");
+      log("Mouse left the image!");
+    });
+
+    // Form Submit
+    document.getElementById("myForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      log("Form submitted successfully!");
+    });
+  </script>
+
+</body>
+</html>
